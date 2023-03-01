@@ -29,6 +29,9 @@
 					{% endif %}
 					{% if is_granted('ROLE_USER') %}
 						<li>
+							<a class="btn2" href="{{ path('app_profile') }}">Profile</a>
+						</li>
+						<li>
 							<a class="btn2" href="{{ path('app_logout') }}">Logout</a>
 						</li>
 					{% endif %}
