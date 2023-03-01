@@ -36,6 +36,6 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::section('Users', User::class);
+        yield MenuItem::subMenu('Users', 'fa-solid fa-right-to-bracket', User::class);
     }
 }
