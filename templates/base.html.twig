@@ -22,6 +22,10 @@
 							<i class="fa-solid fa-lock"></i>
 							<a href="{{ path('admin')}}">Dashboard</a>
 						</li>
+						<li>
+							<i class="fa-solid fa-user"></i>
+							<a href="{{ path('app_register')}}">Add Account</a>
+						</li>
 					{% endif %}
 					{% if is_granted('ROLE_USER') %}
 						<li>
