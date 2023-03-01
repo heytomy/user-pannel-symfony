@@ -5,11 +5,12 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -35,26 +36,35 @@ class RegistrationFormType extends AbstractType
 
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'mapped' => false, // Set to false to prevent mapping to an entity property
-                'label' => 'Password',
-                'attr' => ['autocomplete' => 'new-password'],
-                'first_options' => ['label' => 'Mot de passe : ', 'attr' => ['class' => 'input-full'], 'constraints' => [
-                    new Regex([
-                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
-                        'match' => true,
-                        'message' => 'Le mot de passe doit contenir : minimum 8 caractère, un nombre, une minuscule, une majuscule et un caractère spécial',
-                    ]),
-                ]],
-                
-                'second_options' => ['label' => 'Répéter le mot de passe : ', 'attr' => ['class' => 'input-full'], 'constraints' => [
-                    new Regex([
-                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
-                        'match' => true,
-                    ]),
-                ]],
-                ])
-            ;
-
+                'mapped' => false,
+                'required' => true,
+                'first_options' => [
+                    'label' => 'Password',
+                    'attr' => [
+                        'placeholder' => 'Enter a password',
+                    ],
+                    'constraints' => [
+                        new Regex([
+                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                            'message' => 'The password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&).',
+                        ]),
+                        new NotBlank(),
+                    ],
+                ],
+                'second_options' => [
+                    'label' => 'Repeat Password',
+                    'attr' => [
+                        'placeholder' => 'Repeat your password',
+                    ],
+                    'constraints' => [
+                        new EqualTo([
+                            'propertyPath' => 'plainPassword',
+                            'message' => 'Les mots de passe doivent être identiques.',
+                        ]),                   
+                        new NotBlank(),
+                    ],
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

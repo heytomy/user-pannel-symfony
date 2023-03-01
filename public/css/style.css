@@ -75,13 +75,7 @@ button[type="submit"]:hover {
     background-color: #4d00a5;
 }
 
-/* .container:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 50%;
-    background-color: #4d00a5;
-    z-index: -1;
-} */
+.forgot{
+    padding-top: 1em;
+    text-align: center;
+}
