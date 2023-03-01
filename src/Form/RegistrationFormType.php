@@ -4,17 +4,19 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class RegistrationFormType extends AbstractType
 {
@@ -44,10 +46,6 @@ class RegistrationFormType extends AbstractType
                         'placeholder' => 'Enter a password',
                     ],
                     'constraints' => [
-                        new Regex([
-                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
-                            'message' => 'The password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&).',
-                        ]),
                         new NotBlank(),
                     ],
                 ],
@@ -57,13 +55,19 @@ class RegistrationFormType extends AbstractType
                         'placeholder' => 'Repeat your password',
                     ],
                     'constraints' => [
-                        new EqualTo([
-                            'propertyPath' => 'plainPassword',
-                            'message' => 'Les mots de passe doivent être identiques.',
-                        ]),                   
-                        new NotBlank(),
-                    ],
-                ],
+                        new Callback([
+                            'callback' => function ($value, ExecutionContextInterface $context) use ($builder) {
+                                $password = $builder->get('plainPassword')->getData();
+                                $confirmPassword = $builder->get('plainPassword')->get('second')->getData();
+                                if ($password !== $confirmPassword) {
+                                    $context->buildViolation('The passwords do not match.')
+                                        ->atPath('second')
+                                        ->addViolation();
+                                }
+                            }
+                        ])
+                    ]
+                ]
             ]);
     }
 
