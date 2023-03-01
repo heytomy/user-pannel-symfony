@@ -24,6 +24,9 @@ security:
             remember_me: 
                 secret: '%kernel.secret%'
                 lifetime: 604800
+            two_factor:
+                auth_form_path: 2fa_login    # The route name you have used in the routes.yaml
+                check_path: 2fa_login_check  # The route name you have used in the routes.yaml
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
