@@ -24,17 +24,17 @@ class AppFixtures extends Fixture
         // Create an admin
         $user = new User();
         $user
-        ->setEmail('admin@dashboard-symfony.fr')
+        ->setEmail('nisi.thomas@outlook.fr')
         ->setRoles(['ROLE_ADMIN'])
         ;
 
-        $hashedPassword = $this->passwordHasher->hashPassword($user, 'admin');
+        $hashedPassword = $this->passwordHasher->hashPassword($user, 'yufDZiA3hmp3Ap7');
         $user->setPassword($hashedPassword);
 
         $manager->persist($user);
 
-        // Create 50 users
-        for ($i=0; $i < 50; $i++) {
+        // Create 20 users
+        for ($i=0; $i < 20; $i++) {
             $user = new User();
             $user
                 ->setEmail($faker->email())
