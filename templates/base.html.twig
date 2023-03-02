@@ -16,14 +16,20 @@
 		<nav>
 			<ul>
 				{% if app.user %}
-
 					{% if is_granted('ROLE_ADMIN') %}
 						<li>
 							<i class="fa-solid fa-lock"></i>
-							<a href="{{ path('admin')}}">Dashboard</a>
+							<a href="{{ path('admin')}}">Admin Dash</a>
+						</li>
+						<li>
+							<i class="fa-solid fa-user"></i>
+							<a href="{{ path('app_register')}}">Add Account</a>
 						</li>
 					{% endif %}
 					{% if is_granted('ROLE_USER') %}
+						<li>
+							<a class="btn2" href="{{ path('app_profile') }}">Profile</a>
+						</li>
 						<li>
 							<a class="btn2" href="{{ path('app_logout') }}">Logout</a>
 						</li>
