@@ -9,6 +9,7 @@ scheb_two_factor:
         enabled: true
         sender_email: no-reply@n3pix.fr
         sender_name: Dashboard Login 2FA
+        template: security/2fa_form.html.twig   # Template used to render the authentication form
 
     trusted_device:
         enabled: true                 # If the trusted device feature should be enabled

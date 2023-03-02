@@ -1,20 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
+{% block title %}User Dashboard
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<div class="container">
+		<h1>{{ controller_name }}! ✅</h1>
+		<article>
+			<p>Une fois l'utilisateur connecté, il a accès a cette page. Il a également accès a l'onglet profil ! On peut imaginer qu'il pourra y modifier ces informations (email et mot de passe en l'occurence).</p>
+			    <br>
+			<p>Etant donné que qu'un utilisateur n'a pas le [ROLE_ADMIN], il ne pourra pas accèder au /register ni au /admin, qui contient le dashboard.
+			</p>
+                <br>
+            <p>Fonctionnalités du site: </p>
+                <li>Login / Register</li>
+                <li>Double Auth (2FA)</li>
+                <li>Forgotten Password Reset</li>
+                <li>Mail Verifier at register</li>
+                <li>Profile setting page</li>
+                <li>[ROLE_ADMIN] Admin Dashboard /admin</li>
+		</article>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/pannel-symfony/src/Controller/DashboardController.php'|file_link(0) }}">src/Controller/DashboardController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/pannel-symfony/templates/dashboard/index.html.twig'|file_link(0) }}">templates/dashboard/index.html.twig</a></code></li>
-    </ul>
-</div>
+	</div>
 {% endblock %}
+

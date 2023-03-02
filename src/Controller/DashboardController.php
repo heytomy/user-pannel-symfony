@@ -13,7 +13,7 @@ class DashboardController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashboardController',
+            'controller_name' => 'User Dashboard',
         ]);
     }
 }
