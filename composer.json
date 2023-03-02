@@ -13,7 +13,7 @@
         "doctrine/orm": "^2.14",
         "easycorp/easyadmin-bundle": "^4.6",
         "fakerphp/faker": "^1.21",
-        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpdocumentor/phpdocumentor": "^3.3",
         "phpstan/phpdoc-parser": "^1.16",
         "scheb/2fa-bundle": "^6.7",
         "scheb/2fa-email": "^6.7",
