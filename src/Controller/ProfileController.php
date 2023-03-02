@@ -16,11 +16,23 @@ class ProfileController extends AbstractController
 {
     # TODO: Ne fonctionne pas voir plus tard..
     
+    /**
+     * Displays and handles submission of the user's profile settings.
+     *
+     * @param Request $request The HTTP request object.
+     * @param EntityManagerInterface $entityManager The entity manager.
+     * @param UserPasswordHasherInterface $passwordEncoder The password encoder.
+     * @return Response The HTTP response object.
+     *
+     * @Route("/profile", name="app_profile")
+     */
     #[Route('/profile', name: 'app_profile')]
     public function settings(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordEncoder)
     {
+        // Get the current user.
         $user = $this->getUser();
 
+        // Create a form to update the user's email and password.
         $form = $this->createFormBuilder($user)
             ->add('email', EmailType::class)
             ->add('currentPassword', PasswordType::class, [
@@ -40,7 +52,7 @@ class ProfileController extends AbstractController
                 'label' => 'Confirm new password',
             ])
             ->getForm();
-
+        // Handle form submission and validation.
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

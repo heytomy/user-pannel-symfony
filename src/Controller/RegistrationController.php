@@ -18,15 +18,37 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+/**
+ * Controller for user registration and email verification.
+ */
 class RegistrationController extends AbstractController
 {
+    /**
+     * Email verifier instance.
+     */
     private EmailVerifier $emailVerifier;
 
+    /**
+     * Creates a new RegistrationController instance.
+     *
+     * @param EmailVerifier $emailVerifier Email verifier instance
+     */
     public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
     }
 
+    /**
+     * Handles user registration.
+     *
+     * @param Request $request                HTTP request instance
+     * @param UserPasswordHasherInterface $userPasswordHasher User password hasher instance
+     * @param UserAuthenticatorInterface $userAuthenticator User authenticator instance
+     * @param AppAuthenticator $authenticator  App authenticator instance
+     * @param EntityManagerInterface $entityManager Doctrine entity manager instance
+     *
+     * @return Response HTTP response instance
+     */
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
@@ -70,6 +92,14 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+     /**
+     * Verifies a user's email address.
+     *
+     * @param Request $request           HTTP request instance
+     * @param TranslatorInterface $translator Translator instance
+     *
+     * @return Response HTTP response instance
+     */
     #[Route('/verify', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {

@@ -7,8 +7,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * The SecurityController is responsible for handling login and logout requests.
+ */
 class SecurityController extends AbstractController
 {
+
+    /**
+     * Handles login requests.
+     *
+     * @param AuthenticationUtils $authenticationUtils The authentication utilities.
+     *
+     * @return Response A Response instance representing the HTTP response.
+     */
     #[Route(path: '/', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -25,6 +36,11 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+        /**
+     * Handles logout requests.
+     *
+     * @return void
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
