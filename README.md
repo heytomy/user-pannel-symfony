@@ -9,7 +9,7 @@ Requirements
 
 Installation
 
-    Clone the repository: git clone https://github.com/<username>/<repository-name>.git.
+    Clone the repository: git clone https://github.com/heytomy/pannel-symfony.git.
     
     Install dependencies: composer install.
     
@@ -25,7 +25,7 @@ Installation
 
 Usage
 
-To use the profile settings feature, you'll need to create an account first. Click the "Register" link in the navigation bar and fill in the form.
+To use the profile settings feature, you'll need to create an account first.
 
 Once you've created an account and logged in, you can update your profile settings by clicking the "Settings" link in the navigation bar. Here you can change your email address and password.
 Contributing
