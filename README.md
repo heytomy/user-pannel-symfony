@@ -10,7 +10,7 @@ Requirements
 
 Installation
 
-    git clone https://github.com/heytomy/pannel-symfony.git.
+    git clone https://github.com/heytomy/user-pannel-symfony.git
     
     composer install
     
